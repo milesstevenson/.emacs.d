@@ -1,0 +1,11 @@
+ls
+cd .emacs.d/
+sudo apt-get install git
+ls
+cd dev/
+cd algo/uva/datastructures/
+ls
+mkdir 732
+cd 732/
+g++ main.cpp 
+./a.out 
