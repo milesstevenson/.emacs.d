@@ -26,7 +26,7 @@
  '(js-indent-level 2)
  '(package-selected-packages
    (quote
-    (projectile geiser json-mode flycheck company-c-headers org rjsx-mode company-tern tern magit npm-mode))))
+    (projectile geiser json-mode flycheck company-c-headers org rjsx-mode company-tern magit npm-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -70,7 +70,8 @@
 
 (require 'rjsx-mode)
 (add-to-list 'auto-mode-alist '(".*\\.js\\'" . rjsx-mode))
-;; Set tern-mode t be automatically enabled for Javascript
+;; Set tern-mode to be automatically enabled for Javascript
+;; NOTE: Requires tern to be installed: npm install -g tern
 (add-hook 'js-mode-hook (lambda ()
 			  (tern-mode)
 			  (flycheck-mode)))
