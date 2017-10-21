@@ -16,6 +16,9 @@
 (global-set-key "\C-x\C-k" 'kill-region)
 (global-set-key "\C-c\C-k" 'kill-region)
 
+(setenv "PATH" (concat (getenv "PATH") ":/home/drduck/.nvm/versions/node/v8.7.0/bin"))
+(setq exec-path (append exec-path '("/home/drduck/.nvm/versions/node/v8.7.0/bin")))
+
 (package-initialize)
 
 (custom-set-variables
