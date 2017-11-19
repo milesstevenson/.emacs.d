@@ -29,7 +29,7 @@
  '(js-indent-level 2)
  '(package-selected-packages
    (quote
-    (projectile geiser json-mode flycheck company-c-headers org rjsx-mode company-tern magit npm-mode))))
+    (sublime-themes projectile geiser json-mode flycheck company-c-headers org rjsx-mode company-tern magit npm-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -84,3 +84,10 @@
 (toggle-frame-maximized)                ;; Maximize Emacs on startup
 (menu-bar-mode -1)                      ;; Remove menu bar
 (tool-bar-mode -1)                      ;; Remove toolbar
+(add-to-list 'custom-theme-load-path "/home/drduck/.emacs.d/themes/")
+(load-theme 'brin t)
+(global-linum-mode 1)
+
+; Might want to change these to M-N and M-P
+(global-set-key (kbd "M-n") 'next-buffer)
+(global-set-key (kbd "M-p") 'previous-buffer)
