@@ -16,9 +16,6 @@
 (global-set-key "\C-x\C-k" 'kill-region)
 (global-set-key "\C-c\C-k" 'kill-region)
 
-(setenv "PATH" (concat (getenv "PATH") ":/home/drduck/.nvm/versions/node/v8.7.0/bin"))
-(setq exec-path (append exec-path '("/home/drduck/.nvm/versions/node/v8.7.0/bin")))
-
 (package-initialize)
 
 (custom-set-variables
@@ -26,10 +23,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(js-indent-level 2)
- '(package-selected-packages
+ '(custom-safe-themes
    (quote
-    (sublime-themes projectile geiser json-mode flycheck company-c-headers org rjsx-mode company-tern magit npm-mode))))
+    ("58c6711a3b568437bab07a30385d34aacf64156cc5137ea20e799984f4227265" default)))
+ '(js-indent-level 2))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -41,50 +39,12 @@
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "C-x c") 'magit-clone)
 
-
-(require 'company)
-(add-hook 'after-init-hook 'global-company-mode)
-(setq company-backends (delete 'company-semantic company-backends))
-
-(require 'company-tern)
-(require 'cc-mode)
-(setq company-idle-delay 0)
-(define-key c-mode-map [(tab)] 'company-complete)
-(define-key c++-mode-map [(tab)] 'company-complete)
-(add-to-list 'company-backends '(company-c-headers company-tern))
-(add-hook 'c++-mode-hook 'flycheck-mode)
-(add-hook 'c++-mode-hook (lambda ()
-			   (setq flycheck-checker 'c/c++-clang)
-			   (setq flycheck-clang-language-standard "c++14")
-			   (setq flycheck-gcc-language-standard "c++14")))
-(add-hook 'c-mode-hook 'flycheck-mode)
-
-;; https://emacs.stackexchange.com/questions/33034/change-default-company-mode-keybindings
-(define-key company-active-map (kbd "C-n") 'company-select-next)
-(define-key company-active-map (kbd "C-p") 'company-select-previous)
-(define-key company-search-map (kbd "C-n") 'company-select-next)
-(define-key company-search-map (kbd "C-p") 'company-select-previous)
-(define-key company-search-map (kbd "C-t") 'company-search-toggle-filtering)
-
-
-(require 'company-c-headers)
-(add-to-list 'company-c-headers-path-system "/usr/include/c++/6.3.0/")
-
-
-(require 'rjsx-mode)
-(add-to-list 'auto-mode-alist '(".*\\.js\\'" . rjsx-mode))
-;; Set tern-mode to be automatically enabled for Javascript
-;; NOTE: Requires tern to be installed: npm install -g tern
-(add-hook 'js-mode-hook (lambda ()
-			  (tern-mode)
-			  (flycheck-mode)))
-
 ;; --------------------------------------------
 ;; Basic configuration
 (toggle-frame-maximized)                ;; Maximize Emacs on startup
 (menu-bar-mode -1)                      ;; Remove menu bar
 (tool-bar-mode -1)                      ;; Remove toolbar
-(add-to-list 'custom-theme-load-path "/home/drduck/.emacs.d/themes/")
+(add-to-list 'custom-theme-load-path "/home/user/.emacs.d/themes/")
 (load-theme 'brin t)
 (global-linum-mode 1)
 

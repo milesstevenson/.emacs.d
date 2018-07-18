@@ -1,1 +1,0 @@
-("~/dev/exoplanet-explorer/" "~/dev/reactnd/course-ajax/" "~/dev/reactnd/readable/")
