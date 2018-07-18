@@ -16,6 +16,9 @@
 (global-set-key "\C-x\C-k" 'kill-region)
 (global-set-key "\C-c\C-k" 'kill-region)
 
+(setenv "PATH" (concat (getenv "PATH") ":~/.nvm/versions/node/v10.6.0/bin"))
+(setq exec-path (append exec-path '("~/.nvm/versions/node/v10.6.0/bin")))
+
 (package-initialize)
 
 (custom-set-variables
@@ -25,8 +28,9 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("58c6711a3b568437bab07a30385d34aacf64156cc5137ea20e799984f4227265" default)))
- '(js-indent-level 2))
+    ("3d5ef3d7ed58c9ad321f05360ad8a6b24585b9c49abcee67bdcbb0fe583a6950" "9b59e147dbbde5e638ea1cde5ec0a358d5f269d27bd2b893a0947c4a867e14c1" "58c6711a3b568437bab07a30385d34aacf64156cc5137ea20e799984f4227265" default)))
+ '(js-indent-level 2)
+ '(package-selected-packages (quote (company tide rjsx-mode))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -51,3 +55,31 @@
 ; Might want to change these to M-N and M-P
 (global-set-key (kbd "M-n") 'next-buffer)
 (global-set-key (kbd "M-p") 'previous-buffer)
+
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  (company-mode +1))
+
+;; aligns annotation to the right hand side
+(setq company-tooltip-align-annotations t)
+
+;; formats the buffer before saving
+(add-hook 'before-save-hook 'tide-format-before-save)
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
+
+(require 'web-mode)
+(require 'flycheck)
+
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+(add-hook 'web-mode-hook
+          (lambda ()
+            (when (string-equal "tsx" (file-name-extension buffer-file-name))
+              (setup-tide-mode))))
+
+;; enable typescript-tslint checker
+(flycheck-add-mode 'typescript-tslint 'web-mode)
